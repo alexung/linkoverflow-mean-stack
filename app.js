@@ -18,4 +18,8 @@ function($scope){
     $scope.title = ''; // to clear the form after submit has been entered
   };
 
+  $scope.incrementUpvotes = function(post) {
+    post.upvotes += 1;
+  };
+
 }]);
