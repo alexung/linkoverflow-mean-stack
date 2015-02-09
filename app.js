@@ -1,4 +1,4 @@
-var myApp = angular.module('flapperNews', []);
+var myApp = angular.module('hackerNews', []);
 
 myApp.controller('MainCtrl', [
 '$scope',
@@ -14,8 +14,9 @@ function($scope){
 
   $scope.addPost = function(){
     if(!$scope.title || $scope.title === '') {return;}
-    $scope.posts.push({title: $scope.title, upvotes: 0});
+    $scope.posts.push({title: $scope.title, link: $scope.link, upvotes: 0});
     $scope.title = ''; // to clear the form after submit has been entered
+    $scope.link = '';
   };
 
   $scope.incrementUpvotes = function(post) {
