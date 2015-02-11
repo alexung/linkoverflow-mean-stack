@@ -11,8 +11,16 @@ function($stateProvider, $urlRouterProvider) {
     controller: 'MainCtrl'
   });
 
+  $stateProvider.state('posts', {
+    url: '/posts/{id}',
+    templateUrl: '/posts.html',
+    controller: 'PostsCtrl'
+  });
+
   $urlRouterProvider.otherwise('home');
-}]);
+
+}])
+
 
 myApp.factory('posts', [function(){
   var o = {
@@ -20,6 +28,7 @@ myApp.factory('posts', [function(){
   };
   return o;
 }]);
+
 // by angular conventions, lowerCamelCase is used for factory names that won't be new'd
 // factory and service are similar, but nuanced.  Can check out the difference at http://tylermcginnis.com/angularjs-factory-vs-service-vs-provider/
 
@@ -34,7 +43,18 @@ myApp.controller('PostsCtrl', [
 '$stateParams',
 'posts',
 function($scope, $stateParams, posts) {
+
   $scope.post = posts.posts[$stateParams.id];
+
+  $scope.addComment = function(){
+    if($scope.body === '') { return; }
+    $scope.post.comments.push({
+      body: $scope.body,
+      author: 'user',
+      upvotes: 0
+    });
+    $scope.body = ''
+  };
 
 }]);
 
